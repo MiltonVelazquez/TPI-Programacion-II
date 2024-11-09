@@ -1,12 +1,13 @@
 package menus;
 
 import conexion.Conexion;
+import conexion.ConexionBases;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class MenuBases {
-    static List<String> basesDatos = Conexion.listarBases();
+    static List<String> basesDatos = ConexionBases.listarBases();
     /*public static void main(String[] args){
         opciones();
     }*/
@@ -21,8 +22,8 @@ public class MenuBases {
             if (opcion > 0 && opcion <= basesDatos.size()){
                 String baseSeleccionada = basesDatos.get(opcion - 1);
                 System.out.println("Seleccionaste: " + baseSeleccionada);
-                Conexion.conectarBaseDatos(baseSeleccionada);
-                MenuBase.opciones();
+                ConexionBases.conectarBaseDatos(baseSeleccionada);
+                MenuBase.opcion();
             } else if (opcion == (basesDatos.size() + 1)) {
                 MenuUno.opciones();
             } else {
@@ -32,6 +33,7 @@ public class MenuBases {
 
         } while (opcion != basesDatos.size() + 2);
         System.out.println("Que tenga buen dia.");
+        System.exit(0);
     }
     public static void menuBases(){
         for (int i = 0; i < basesDatos.size(); i++) {

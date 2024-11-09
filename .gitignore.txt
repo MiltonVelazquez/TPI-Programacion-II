@@ -1,2 +1,2 @@
 .idea
-entorno/desarrollo/credenciales.env
+entorno/*

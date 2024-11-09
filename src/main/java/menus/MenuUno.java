@@ -1,6 +1,7 @@
 package menus;
 
 import conexion.Conexion;
+import conexion.ConexionBases;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,13 +32,13 @@ public class    MenuUno {
                 case 1:
                     System.out.print("Ingrese el nombre de la base de datos a crear: ");
                     String nombreA = teclado.nextLine();
-                    Conexion.crearBaseDatos(nombreA);
+                    ConexionBases.crearBaseDatos(nombreA);
                     break;
                 case 2:
                     String nombreE = "";
                     System.out.print("Ingrese el nombre de la base de datos a eliminar: ");
                     nombreE = teclado.nextLine();
-                    Conexion.borrarBaseDatos(nombreE);
+                    ConexionBases.borrarBaseDatos(nombreE);
                     break;
                 case 3:
                     MenuBases.opciones();
