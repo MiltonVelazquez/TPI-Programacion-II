@@ -1,77 +1,67 @@
 package conexion;
 
-import menus.MenuBase;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import funcion.FuncionTabla;
+import menus.MenuTrabajarConTabla;
+import java.sql.*;
+import java.util.*;
 
 public class ConexionTabla {
     static Scanner teclado = new Scanner(System.in);
-    static int opcion = 0;
-    public static void crearTabla(){
+
+    public static void crearTabla(String baseSeleccionada) {
         System.out.print("Ingrese el nombre de la tabla a crear: ");
         String nombre = teclado.nextLine();
-        try (Connection conn = DriverManager.getConnection(Conexion.url, Conexion.usuario, Conexion.contra);Statement stmt = conn.createStatement()){
-            crearCampo();
-            String sql = "CREATE TABLE" + nombre + "(";
+        try (Connection conn = DriverManager.getConnection(Conexion.url + baseSeleccionada, Conexion.usuario, Conexion.contra); Statement stmt = conn.createStatement()) {
+            String campos = FuncionTabla.crearCampo(baseSeleccionada);
+            String sql = "CREATE TABLE " + nombre + " (`id` INT NOT NULL AUTO_INCREMENT, " + campos + ", PRIMARY KEY (`id`))";
+            System.out.println(sql);
             stmt.executeUpdate(sql);
+            System.out.println("Tabla " + nombre + " creada con exito");
 
+
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    public static void listarTabla(String baseSeleccionada){
+        try (Connection conn = DriverManager.getConnection(Conexion.url + baseSeleccionada, Conexion.usuario, Conexion.contra); Statement stmt = conn.createStatement()) {
+            String sql = "SHOW TABLES";
+            ResultSet resultado = stmt.executeQuery(sql);
+            System.out.println("Tablas en la base de datos: ");
+            while (resultado.next()) {
+                System.out.println(resultado.getString(1));
+            }
         } catch (SQLException e){
             System.out.println("Error: " + e.getMessage());
         }
     }
-    public static void crearCampo(){
 
-        do{
-            preguntarCampo();
-            tomarOpcion();
-            opcion = teclado.nextInt();
-            teclado.nextLine();
-            switch (opcion){
-                case 1:
-                    opcionCampo();
-                    break;
-                case 2:
-                    MenuBase.opciones();
-                    break;
-            }
+    public static void eliminarTabla(String baseSeleccionada) {
+        try (Connection conn = DriverManager.getConnection(Conexion.url + baseSeleccionada, Conexion.usuario, Conexion.contra); Statement stmt = conn.createStatement()){
+            System.out.print("Ingrese el nombre de la tabla a eliminar: ");
+            String nombreE = teclado.nextLine();
+            String sqlE = "DROP TABLE " + nombreE;
+            stmt.executeUpdate(sqlE);
+            System.out.println("Tabla " + nombreE + " eliminada con exito.");
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
 
-        } while(opcion != 10);
-    }
-    public static void opcionCampo(){
-        String nombre;
-        System.out.print("Ingrese el nombre del campo: ");
-        nombre = teclado.nextLine();
-        Map<String, List<String>> campos = new HashMap <>();
-        valorCampo();
 
+    public static void modificarTabla(String baseSeleccionada) {
+        try (Connection conn = DriverManager.getConnection(Conexion.url + baseSeleccionada, Conexion.usuario, Conexion.contra); Statement stmt = conn.createStatement()){
+            System.out.print("Ingrese el nombre de la tabla a modificar: ");
+            String nombreModificar = teclado.nextLine();
+            System.out.print("Ingrese el nuevo nombre de la tabla: ");
+            String nombreNuevo = teclado.nextLine();
+            String sqlModificar = "ALTER TABLE " + nombreModificar + " RENAME TO " + nombreNuevo;
+            stmt.executeUpdate(sqlModificar);
+            System.out.println("El nombre de la tabla " + nombreModificar + " cambiado a " + nombreNuevo);
+        } catch (SQLException e){
+            System.out.println("Error: " + e.getMessage());
+        }
     }
-    public static String valorCampo(){
-        System.out.println("Ingrese que tipo de dato quiere en el campo: ");
-        System.out.println("1 - Varchar de 50 caracteres");
-        System.out.println("2 - Varchar de 100 caracteres");
-        System.out.println("3 - Numero entero");
-        System.out.println("4 - Fecha (En formato Año/Mes/Dia)");
-        tomarOpcion();
-        opcion = teclado.nextInt();
-        teclado.nextLine();
-        return valores()
-    }
-    public static void preguntarCampo(){
-        System.out.println("*** ¿Desea crear un nuevo campo? ***");
-        System.out.println("1 - Si");
-        System.out.println("2 - No");
-    }
-    public static void tomarOpcion(){
-        System.out.print("Ingrese una opcion dependiendo del numero: ");
-    }
-    public static void eliminarTabla(){}
-    public static void modificarTabla(){}
 
 }

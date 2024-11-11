@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class    MenuUno {
+public class Main {
     public static void main(String[] args){
         opciones();
     }
@@ -41,7 +41,7 @@ public class    MenuUno {
                     ConexionBases.borrarBaseDatos(nombreE);
                     break;
                 case 3:
-                    MenuBases.opciones();
+                    MenuSeleccionBases.opcionesM();
                     break;
             }
         } while(opcion != 4);

@@ -1,2 +1,4 @@
-.idea
-entorno/*
+.idea/
+entorno/desarrollo/credenciales.env
+src/main/java/Prueba.java
+target/*
