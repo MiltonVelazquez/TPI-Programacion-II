@@ -22,8 +22,7 @@ public class MenuTrabajarConBase {
                     MenuTrabajarConCampo.opciones(baseSeleccionada);
                     break;
                 case 3:
-                    // MenuDatos.opcion();
-                    System.out.println("Menu datos");
+                    MenuTrabajarConDato.correrMenu(baseSeleccionada);
                     break;
                 case 4:
                     return;

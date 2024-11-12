@@ -24,7 +24,7 @@ public class ConexionColumna {
     }
     public static void listarColumna(String baseSeleccionada){
         try(Connection conn = DriverManager.getConnection(Conexion.url + baseSeleccionada, Conexion.usuario, Conexion.contra); Statement stmt = conn.createStatement()){
-            String saberColumnas = saberTabla(baseSeleccionada);
+            String saberColumnas = FuncionCampo.saberTabla(baseSeleccionada);
             String sql = "DESCRIBE " + saberColumnas;
             ResultSet resultado = stmt.executeQuery(sql);
             System.out.println("Columnas de la tabla " + saberColumnas);
@@ -85,7 +85,7 @@ public class ConexionColumna {
     }
     public static void eliminarColumna(String baseSeleccionada){
         try(Connection conn = DriverManager.getConnection(Conexion.url + baseSeleccionada, Conexion.usuario, Conexion.contra); Statement stmt = conn.createStatement()){
-            String nombreTabla = saberTabla(baseSeleccionada);
+            String nombreTabla = FuncionCampo.saberTabla(baseSeleccionada);
             String sql = "DESCRIBE " + nombreTabla;
             ResultSet resultado = stmt.executeQuery(sql);
             System.out.println("Columnas de la tabla " + nombreTabla);
@@ -102,12 +102,7 @@ public class ConexionColumna {
         }
     }
 
-    public static String saberTabla(String baseSeleccionada){
-       ConexionTabla.listarTabla(baseSeleccionada);
-       System.out.print("Ingrese el nombre de la tabla con la que desea trabajar: ");
-       String saberColumnas = teclado.nextLine();
-       return saberColumnas;
-    }
+
 
     public static String obtenerTipoDato(String tabla, String columna, String baseSeleccionada){
         try(Connection conn = DriverManager.getConnection(Conexion.url + baseSeleccionada, Conexion.usuario, Conexion.contra); Statement stmt = conn.createStatement()){

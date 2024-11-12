@@ -8,19 +8,6 @@ import utilidades.credenciales;
 import java.util.Scanner;
 
 public class Conexion {
-    public Conexion() throws SQLException {
-    }
-
-    public static void main(String[] args) {
-        /*Scanner teclado = new Scanner(System.in);
-        System.out.print("Ingrese el nombre de la DB: ");
-        String baseDatos = teclado.nextLine();
-        crearBaseDatos(baseDatos);
-        conectarBaseDatos(baseDatos);
-        listarBases();*/
-
-
-    }
 
     static String carpeta = "desarrollo";
     static HashMap<String, String> listaVar = credenciales.getVarEnt(carpeta);
