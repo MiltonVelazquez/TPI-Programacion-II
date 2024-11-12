@@ -2,6 +2,7 @@ package conexion;
 
 import funcion.FuncionCampo;
 import funcion.FuncionTabla;
+import menus.MenuTrabajarConCampo;
 import utilidades.Utilidades;
 
 import java.sql.*;
@@ -20,6 +21,7 @@ public class ConexionColumna {
             stmt.executeUpdate(sql);
         } catch (SQLException e){
             System.out.println("Error: " + e.getMessage());
+            MenuTrabajarConCampo.correrMenu(baseSeleccionada);
         }
     }
     public static void listarColumna(String baseSeleccionada){
@@ -33,11 +35,12 @@ public class ConexionColumna {
             }
         } catch (SQLException e){
             System.out.println("Error: " + e.getMessage());
+            MenuTrabajarConCampo.correrMenu(baseSeleccionada);
         }
     }
     public static void modificarColumna(String baseSeleccionada){
         try(Connection conn = DriverManager.getConnection(Conexion.url + baseSeleccionada, Conexion.usuario, Conexion.contra); Statement stmt = conn.createStatement()){
-            String saberColumnas = saberTabla(baseSeleccionada);
+            String saberColumnas = FuncionCampo.saberTabla(baseSeleccionada);
             String sql = "DESCRIBE " + saberColumnas;
             ResultSet resultado = stmt.executeQuery(sql);
             System.out.println("Columnas de la tabla " + saberColumnas);
@@ -79,6 +82,7 @@ public class ConexionColumna {
 
         } catch (SQLException e){
             System.out.println("Error: " + e.getMessage());
+            MenuTrabajarConCampo.correrMenu(baseSeleccionada);
         }
 
 
@@ -99,10 +103,9 @@ public class ConexionColumna {
             stmt.executeUpdate(sqlEliminar);
         } catch (SQLException e){
             System.out.println("Error: " + e.getMessage());
+            MenuTrabajarConCampo.correrMenu(baseSeleccionada);
         }
     }
-
-
 
     public static String obtenerTipoDato(String tabla, String columna, String baseSeleccionada){
         try(Connection conn = DriverManager.getConnection(Conexion.url + baseSeleccionada, Conexion.usuario, Conexion.contra); Statement stmt = conn.createStatement()){

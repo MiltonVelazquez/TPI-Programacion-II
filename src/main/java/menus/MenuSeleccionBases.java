@@ -1,6 +1,8 @@
 package menus;
 
 import conexion.ConexionBases;
+import utilidades.Utilidades;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -8,7 +10,7 @@ public class MenuSeleccionBases {
     private static final List<String> basesDatos = ConexionBases.listarBases();
     private static final Scanner teclado = new Scanner(System.in);
 
-    public static void opcionesM() {
+    public static void correrMenu() {
         int opcion;
         do {
             menuBases();
@@ -20,7 +22,7 @@ public class MenuSeleccionBases {
                 String baseSeleccionada = basesDatos.get(opcion - 1);
                 System.out.println("Seleccionaste: " + baseSeleccionada);
                 ConexionBases.conectarBaseDatos(baseSeleccionada);
-                MenuTrabajarConBase.opciones(baseSeleccionada);
+                MenuTrabajarConBase.correrMenu(baseSeleccionada);
 
             } else if (opcion == basesDatos.size() + 1) {
                 return;
@@ -28,8 +30,7 @@ public class MenuSeleccionBases {
                 System.out.println("Esa base de datos no existe.");
             }
         } while (opcion != basesDatos.size() + 2);
-        System.out.println("Que tenga buen dia.");
-        System.exit(0);
+        Utilidades.salir();
     }
 
     public static void menuBases() {

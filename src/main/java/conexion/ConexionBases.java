@@ -1,5 +1,8 @@
 package conexion;
 
+import menus.Main;
+import menus.MenuTrabajarConCampo;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +16,7 @@ public class ConexionBases {
             System.out.println("Base de datos " + baseDatos + " creada con exito");
         } catch (SQLException e){
             System.out.println("Se ha producido un error: " + e.toString());
+            Main.correrMenu();
         }
     }
     public static void conectarBaseDatos(String baseDatos){
@@ -25,6 +29,7 @@ public class ConexionBases {
             }
         } catch(SQLException e){
             System.out.println("Error al conectarse a la base de datos: " + e.toString());
+            Main.correrMenu();
         }
     }
     public static List<String> listarBases(){
@@ -39,6 +44,7 @@ public class ConexionBases {
             }
         }catch(SQLException e){
             System.out.println("Error: " + e.getMessage());
+            Main.correrMenu();
         }
         return basesDatos;
     }
@@ -49,6 +55,7 @@ public class ConexionBases {
             stmt.executeUpdate(sql);
         }catch(SQLException e){
             System.out.println("Error: " + e.getMessage());
+            Main.correrMenu();
         }
     }
 }

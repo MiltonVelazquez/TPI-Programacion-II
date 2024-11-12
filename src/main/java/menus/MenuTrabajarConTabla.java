@@ -6,7 +6,7 @@ import java.util.*;
 
 public class MenuTrabajarConTabla{
     static int opcion = 0;
-    public static void opciones(String baseSeleccionada){
+    public static void correrMenu(String baseSeleccionada){
         do {
             menuTabla();
             opcion = Utilidades.tomarOpcion();
@@ -24,7 +24,7 @@ public class MenuTrabajarConTabla{
                     ConexionTabla.modificarTabla(baseSeleccionada);
                     break;
                 case 5:
-                    MenuTrabajarConBase.opciones(baseSeleccionada);
+                    MenuTrabajarConBase.correrMenu(baseSeleccionada);
                     break;
 
             }

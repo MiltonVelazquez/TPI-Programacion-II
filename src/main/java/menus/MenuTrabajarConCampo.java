@@ -5,7 +5,7 @@ import utilidades.Utilidades;
 
 public class MenuTrabajarConCampo {
     static int opcion = 0;
-    public static void opciones(String baseSeleccionada){
+    public static void correrMenu(String baseSeleccionada){
         do {
             menu();
             opcion = Utilidades.tomarOpcion();
@@ -23,7 +23,7 @@ public class MenuTrabajarConCampo {
                     ConexionColumna.eliminarColumna(baseSeleccionada);
                     break;
                 case 5:
-                    MenuTrabajarConBase.opciones(baseSeleccionada);
+                    MenuTrabajarConBase.correrMenu(baseSeleccionada);
                     break;
             }
         } while (opcion != 6);

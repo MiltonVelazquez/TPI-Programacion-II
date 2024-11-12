@@ -1,12 +1,14 @@
 package menus;
 
 import conexion.ConexionTabla;
+import utilidades.Utilidades;
+
 import java.util.Scanner;
 
 public class MenuTrabajarConBase {
     private static final Scanner teclado = new Scanner(System.in);
 
-    public static void opciones(String baseSeleccionada) {
+    public static void correrMenu(String baseSeleccionada) {
         int opcion;
         do {
             menuBase();
@@ -16,10 +18,10 @@ public class MenuTrabajarConBase {
 
             switch (opcion) {
                 case 1:
-                    MenuTrabajarConTabla.opciones(baseSeleccionada);
+                    MenuTrabajarConTabla.correrMenu(baseSeleccionada);
                     break;
                 case 2:
-                    MenuTrabajarConCampo.opciones(baseSeleccionada);
+                    MenuTrabajarConCampo.correrMenu(baseSeleccionada);
                     break;
                 case 3:
                     MenuTrabajarConDato.correrMenu(baseSeleccionada);
@@ -28,8 +30,7 @@ public class MenuTrabajarConBase {
                     return;
             }
         } while (opcion != 5);
-        System.out.println("Que tenga buen dia.");
-        System.exit(0);
+        Utilidades.salir();
     }
 
     public static void menuBase() {

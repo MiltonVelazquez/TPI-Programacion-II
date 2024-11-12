@@ -35,7 +35,7 @@ public class MenuTrabajarConDato {
                     ConexionDato.eliminarDato(baseSeleccionada);
                     break;
                 case 5:
-                    MenuTrabajarConBase.opciones(baseSeleccionada);
+                    MenuTrabajarConBase.correrMenu(baseSeleccionada);
                     break;
             }
         } while (opcion != 6);

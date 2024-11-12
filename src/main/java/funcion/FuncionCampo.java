@@ -2,7 +2,12 @@ package funcion;
 
 import conexion.ConexionTabla;
 
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.Scanner;
+
 public class FuncionCampo {
+    static Scanner teclado = new Scanner(System.in);
     public static String crearCampo(){
         return FuncionTabla.opcionCampo();
     }
@@ -12,4 +17,5 @@ public class FuncionCampo {
         String saberColumnas = teclado.nextLine();
         return saberColumnas;
     }
+
 }

@@ -2,6 +2,7 @@ package menus;
 
 import conexion.Conexion;
 import conexion.ConexionBases;
+import utilidades.Utilidades;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args){
-        opciones();
+        correrMenu();
     }
     public static void menuPrincipal(){
 
@@ -20,7 +21,7 @@ public class Main {
         System.out.println("4 - Salir");
     }
 
-    public static void opciones(){
+    public static void correrMenu(){
         Scanner teclado = new Scanner(System.in);
         int opcion = 0;
         do {
@@ -41,11 +42,11 @@ public class Main {
                     ConexionBases.borrarBaseDatos(nombreE);
                     break;
                 case 3:
-                    MenuSeleccionBases.opcionesM();
+                    MenuSeleccionBases.correrMenu();
                     break;
             }
         } while(opcion != 4);
-        System.out.println("Que tenga buen día.");
+        Utilidades.salir();
     }
 }
 

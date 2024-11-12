@@ -13,7 +13,12 @@ public class ConexionTabla {
         String nombre = teclado.nextLine();
         try (Connection conn = DriverManager.getConnection(Conexion.url + baseSeleccionada, Conexion.usuario, Conexion.contra); Statement stmt = conn.createStatement()) {
             String campos = FuncionTabla.crearCampo(baseSeleccionada);
-            String sql = "CREATE TABLE " + nombre + " (`id` INT NOT NULL AUTO_INCREMENT, " + campos + ", PRIMARY KEY (`id`))";
+            String sql;
+            if (campos.isEmpty()){
+                sql = "CREATE TABLE " + nombre + " (`id` INT NOT NULL AUTO_INCREMENT, PRIMARY KEY (`id`))";
+            } else {
+                sql = "CREATE TABLE " + nombre + " (`id` INT NOT NULL AUTO_INCREMENT, " + campos + ", PRIMARY KEY (`id`))";
+            }
             System.out.println(sql);
             stmt.executeUpdate(sql);
             System.out.println("Tabla " + nombre + " creada con exito");
@@ -21,6 +26,7 @@ public class ConexionTabla {
 
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
+            MenuTrabajarConTabla.correrMenu(baseSeleccionada);
         }
     }
 
@@ -34,6 +40,7 @@ public class ConexionTabla {
             }
         } catch (SQLException e){
             System.out.println("Error: " + e.getMessage());
+            MenuTrabajarConTabla.correrMenu(baseSeleccionada);
         }
     }
 
@@ -46,9 +53,9 @@ public class ConexionTabla {
             System.out.println("Tabla " + nombreE + " eliminada con exito.");
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
+            MenuTrabajarConTabla.correrMenu(baseSeleccionada);
         }
     }
-
 
     public static void modificarTabla(String baseSeleccionada) {
         try (Connection conn = DriverManager.getConnection(Conexion.url + baseSeleccionada, Conexion.usuario, Conexion.contra); Statement stmt = conn.createStatement()){
@@ -61,6 +68,7 @@ public class ConexionTabla {
             System.out.println("El nombre de la tabla " + nombreModificar + " cambiado a " + nombreNuevo);
         } catch (SQLException e){
             System.out.println("Error: " + e.getMessage());
+            MenuTrabajarConTabla.correrMenu(baseSeleccionada);
         }
     }
 

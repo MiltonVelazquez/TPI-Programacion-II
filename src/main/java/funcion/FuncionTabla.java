@@ -23,8 +23,7 @@ public class FuncionTabla {
                         campos.append(resultado);
                         break;
                     case 2:
-                        // Termina el bucle cuando el usuario ingresa 2
-                        break;
+                       break;
                     default:
                         System.out.println("Opción inválida, intenta nuevamente.");
                 }
@@ -45,23 +44,21 @@ public class FuncionTabla {
         campos.computeIfAbsent(nombre, k -> new ArrayList<>()).add(atributo);
         String tipoCampo = tipoCampo();
         campos.computeIfAbsent(nombre, k -> new ArrayList<>()).add(tipoCampo);
-        //String autoCampo = autoCampo();
-        //campos.computeIfAbsent(nombre, k -> new ArrayList<>()).add(autoCampo);
+        String nulo = nuloNo();
+        campos.computeIfAbsent(nombre, k -> new ArrayList<>()).add(nulo);
         StringBuilder concatenado = new StringBuilder();
-        // Recorrer y imprimir todas las claves y sus valores
         for (Map.Entry<String, List<String>> entrada : campos.entrySet()) {
             concatenado.append(entrada.getKey()).append(" ");
             List<String> valores = entrada.getValue();
             for (int i = 0; i < valores.size(); i++) {
                 concatenado.append(valores.get(i));
-                if (i < valores.size() - 1) { // Evita agregar una coma después del último valor
+                if (i < valores.size() - 1) {
                     concatenado.append(" ");
                 }
             }
         }
         String resultado = concatenado.toString().trim();
-        //System.out.println(resultado);
-        return resultado;
+         return resultado;
     }
     public static String valorCampo(){
         System.out.println("Ingrese que tipo de dato quiere en el campo: ");
@@ -103,18 +100,18 @@ public class FuncionTabla {
         }
         return tipoCampo;
     }
-    /*public static String autoCampo(){
+    public static String nuloNo(){
         String autoCampo = "";
-        System.out.println("*** ¿Desea que su campo sea auto incremental? ***");
+        System.out.println("*** ¿Desea que su campo permita valores nulos? ***");
         System.out.println("1 - Si");
         System.out.println("2 - No");
         opcion = Utilidades.tomarOpcion();
         switch (opcion){
             case 1:
-                autoCampo = "AUTO_INCREMENT";
+                autoCampo = "NULL";
                 break;
             case 2:
-                autoCampo = "";
+                autoCampo = "NOT NULL";
                 break;
         }
         return autoCampo;

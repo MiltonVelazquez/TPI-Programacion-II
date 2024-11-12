@@ -2,6 +2,9 @@ package conexion;
 
 import com.github.freva.asciitable.AsciiTable;
 import com.github.freva.asciitable.Column;
+import funcion.FuncionCampo;
+import menus.MenuTrabajarConDato;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +15,7 @@ public class ConexionDato {
     public static void crearDato(String baseSeleccionada) {
         try (Connection conn = DriverManager.getConnection(Conexion.url + baseSeleccionada, Conexion.usuario, Conexion.contra);
             Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
-            String tabla = ConexionColumna.saberTabla(baseSeleccionada);
+            String tabla = FuncionCampo.saberTabla(baseSeleccionada);
             String sql = "DESCRIBE " + tabla;
             ResultSet resultado = stmt.executeQuery(sql);
             System.out.println("Ingrese los datos de cada columna: ");
@@ -33,8 +36,6 @@ public class ConexionDato {
             }
 
             sqlCrear.append(") VALUES (");
-
-            // Restablecer el cursor al inicio y obtener los valores ingresados
             resultado.beforeFirst();
             i = 0;
             while (resultado.next()) {
@@ -59,12 +60,13 @@ public class ConexionDato {
             stmt.executeUpdate(sqlCrear.toString().trim());
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
+            MenuTrabajarConDato.correrMenu(baseSeleccionada);
         }
 
     }
     public static String listarDatos(String baseSeleccionada){
         try(Connection conn = DriverManager.getConnection(Conexion.url + baseSeleccionada, Conexion.usuario, Conexion.contra); Statement stmt = conn.createStatement()){
-            String tabla = ConexionColumna.saberTabla(baseSeleccionada);
+            String tabla = FuncionCampo.saberTabla(baseSeleccionada);
             String sql = "SELECT * FROM " + tabla;
             ResultSet resultado = stmt.executeQuery(sql);
             int cantidadColumnas = resultado.getMetaData().getColumnCount();
@@ -80,7 +82,6 @@ public class ConexionDato {
                 }
                 filas.add(fila);
             }
-            Character[] bordes = {'+', '-', '|', '-', '|', '+'};
             Object[][] filasArray = new Object[filas.size()][cantidadColumnas];
             for (int i = 0; i < filas.size(); i++){
                 filasArray[i] = filas.get(i);
@@ -90,13 +91,14 @@ public class ConexionDato {
             return tabla;
         } catch(SQLException e){
             System.out.println("Error: " + e.getMessage());
+            MenuTrabajarConDato.correrMenu(baseSeleccionada);
         }
         return "";
     }
     public static void actualizarDato(String baseSeleccionada) {
         try (Connection conn = DriverManager.getConnection(Conexion.url + baseSeleccionada, Conexion.usuario, Conexion.contra);
              Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
-            String tabla = ConexionColumna.saberTabla(baseSeleccionada);
+            String tabla = FuncionCampo.saberTabla(baseSeleccionada);
             String sql = "DESCRIBE " + tabla;
             ResultSet resultado = stmt.executeQuery(sql);
             System.out.println("Ingrese los datos de cada columna a modificar");
@@ -137,6 +139,7 @@ public class ConexionDato {
             stmt.executeUpdate(sqlActualizar.toString().trim());
         } catch (SQLException e) {
             System.out.println("Error: " + e);
+            MenuTrabajarConDato.correrMenu(baseSeleccionada);
         }
     }
     public static void eliminarDato(String baseSeleccionada){
@@ -149,6 +152,7 @@ public class ConexionDato {
             teclado.nextLine();
         } catch (SQLException e){
             System.out.println("Error: " + e.getMessage());
+            MenuTrabajarConDato.correrMenu(baseSeleccionada);
         }
 
     }
