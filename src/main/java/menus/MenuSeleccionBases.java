@@ -7,16 +7,16 @@ import java.util.List;
 import java.util.Scanner;
 
 public class MenuSeleccionBases {
-    private static final List<String> basesDatos = ConexionBases.listarBases();
     private static final Scanner teclado = new Scanner(System.in);
 
     public static void correrMenu() {
         int opcion;
+        List<String> basesDatos;
         do {
-            menuBases();
-            System.out.print("Ingrese una opcion o con que base desea trabajar: ");
-            opcion = teclado.nextInt();
-            teclado.nextLine();
+            System.out.println("++++++++++++++++++++++++++++++++++");
+            basesDatos = ConexionBases.listarBases();
+            menuBases(basesDatos);
+            opcion = Utilidades.tomarOpcion();
 
             if (opcion > 0 && opcion <= basesDatos.size()){
                 String baseSeleccionada = basesDatos.get(opcion - 1);
@@ -33,7 +33,7 @@ public class MenuSeleccionBases {
         Utilidades.salir();
     }
 
-    public static void menuBases() {
+    public static void menuBases(List<String> basesDatos) {
         for (int i = 0; i < basesDatos.size(); i++) {
             System.out.println((i + 1) + " - " + basesDatos.get(i));
         }

@@ -3,6 +3,7 @@ package menus;
 import conexion.ConexionTabla;
 import utilidades.Utilidades;
 
+import javax.rmi.CORBA.Util;
 import java.util.Scanner;
 
 public class MenuTrabajarConBase {
@@ -11,22 +12,26 @@ public class MenuTrabajarConBase {
     public static void correrMenu(String baseSeleccionada) {
         int opcion;
         do {
+            System.out.println("++++++++++++++++++++++++++++++++++");
             menuBase();
-            System.out.print("Ingrese una opcion dependiendo del numero: ");
-            opcion = teclado.nextInt();
-            teclado.nextLine();
+            opcion = Utilidades.tomarOpcion();
 
             switch (opcion) {
                 case 1:
+                    System.out.println("++++++++++++++++++++++++++++++++++");
                     MenuTrabajarConTabla.correrMenu(baseSeleccionada);
                     break;
                 case 2:
+                    System.out.println("++++++++++++++++++++++++++++++++++");
                     MenuTrabajarConCampo.correrMenu(baseSeleccionada);
                     break;
                 case 3:
+                    System.out.println("++++++++++++++++++++++++++++++++++");
                     MenuTrabajarConDato.correrMenu(baseSeleccionada);
                     break;
                 case 4:
+                    System.out.println("++++++++++++++++++++++++++++++++++");
+                    MenuSeleccionBases.correrMenu();
                     return;
             }
         } while (opcion != 5);

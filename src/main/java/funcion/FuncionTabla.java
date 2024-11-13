@@ -61,61 +61,87 @@ public class FuncionTabla {
          return resultado;
     }
     public static String valorCampo(){
-        System.out.println("Ingrese que tipo de dato quiere en el campo: ");
-        System.out.println("1 - Varchar de 50 caracteres");
-        System.out.println("2 - Varchar de 100 caracteres");
-        System.out.println("3 - Numero entero");
-        System.out.println("4 - Fecha (En formato Año/Mes/Dia)");
-        opcion = Utilidades.tomarOpcion();
         String valor = "";
-        switch(opcion){
-            case 1:
-                valor = "VARCHAR(50)";
-                break;
-            case 2:
-                valor = "VARCHAR(100)";
-                break;
-            case 3:
-                valor = "INT";
-                break;
-            case 4:
-                valor = "DATE";
-                break;
+        boolean valido = false;
+        while(!valido) {
+            System.out.println("Ingrese que tipo de dato quiere en el campo: ");
+            System.out.println("1 - Varchar de 50 caracteres");
+            System.out.println("2 - Varchar de 100 caracteres");
+            System.out.println("3 - Numero entero");
+            System.out.println("4 - Fecha (En formato Año/Mes/Dia)");
+            opcion = Utilidades.tomarOpcion();
+
+            switch (opcion) {
+                case 1:
+                    valor = "VARCHAR(50)";
+                    valido = true;
+                    break;
+                case 2:
+                    valor = "VARCHAR(100)";
+                    valido = true;
+                    break;
+                case 3:
+                    valor = "INT";
+                    valido = true;
+                    break;
+                case 4:
+                    valor = "DATE";
+                    valido = true;
+                    break;
+                default:
+                    System.out.println("Esa opcion no existe");
+            }
         }
         return valor;
     }
     public static String tipoCampo(){
-        System.out.println("*** ¿Que tipo de dato desea? ***");
-        System.out.println("1 - Unico");
-        System.out.println("2 - No unico");
         String tipoCampo = "";
-        opcion = Utilidades.tomarOpcion();
-        switch (opcion){
-            case 1:
-                tipoCampo = "UNIQUE";
-                break;
-            case 2:
-                tipoCampo = "";
-                break;
+        boolean valido = false;
+        while(!valido) {
+            System.out.println("*** ¿Que tipo de dato desea? ***");
+            System.out.println("1 - Unico");
+            System.out.println("2 - No unico");
+            opcion = Utilidades.tomarOpcion();
+            switch (opcion) {
+                case 1:
+                    tipoCampo = "UNIQUE";
+                    valido = true;
+                    break;
+                case 2:
+                    tipoCampo = "";
+                    valido = true;
+                    break;
+                default:
+                    System.out.println("Esa opcion no existe");
+                    break;
+            }
         }
         return tipoCampo;
     }
     public static String nuloNo(){
         String autoCampo = "";
-        System.out.println("*** ¿Desea que su campo permita valores nulos? ***");
-        System.out.println("1 - Si");
-        System.out.println("2 - No");
-        opcion = Utilidades.tomarOpcion();
-        switch (opcion){
-            case 1:
-                autoCampo = "NULL";
-                break;
-            case 2:
-                autoCampo = "NOT NULL";
-                break;
+        boolean valido = false;
+        while (!valido) {
+            System.out.println("*** ¿Desea que su campo permita valores nulos? ***");
+            System.out.println("1 - Si");
+            System.out.println("2 - No");
+            opcion = Utilidades.tomarOpcion();
+            switch (opcion) {
+                case 1:
+                    autoCampo = "NULL";
+                    valido = true;
+                    break;
+                case 2:
+                    autoCampo = "NOT NULL";
+                    valido = true;
+                    break;
+                default:
+                    System.out.println("Esa opcion no existe");
+                    break;
+            }
         }
         return autoCampo;
-    }*/
+    }
     public static void preguntarCampo(){
         System.out.println("*** ¿Desea crear un nuevo campo? ***");
         System.out.println("1 - Si");

@@ -147,7 +147,7 @@ public class ConexionDato {
             String tabla = listarDatos(baseSeleccionada);
             System.out.print("Ingrese el id del campo que desea eliminar: ");
             int id = teclado.nextInt();
-            String sql = "DELETE FROM " + tabla + " WHERE id = " + id;
+            String sql = "DELETE FROM " + tabla + " WHERE "id = " + id;
             stmt.executeUpdate(sql);
             teclado.nextLine();
         } catch (SQLException e){

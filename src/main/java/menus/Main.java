@@ -25,25 +25,28 @@ public class Main {
         Scanner teclado = new Scanner(System.in);
         int opcion = 0;
         do {
+            System.out.println("++++++++++++++++++++++++++++++++++");
             menuPrincipal();
-            System.out.print("Ingrese una opcion dependiendo del numero: ");
-            opcion = teclado.nextInt();
-            teclado.nextLine();
+            opcion = Utilidades.tomarOpcion();
             switch(opcion){
                 case 1:
+                    System.out.println("++++++++++++++++++++++++++++++++++");
                     System.out.print("Ingrese el nombre de la base de datos a crear: ");
                     String nombreA = teclado.nextLine();
                     ConexionBases.crearBaseDatos(nombreA);
                     break;
                 case 2:
-                    String nombreE = "";
-                    System.out.print("Ingrese el nombre de la base de datos a eliminar: ");
-                    nombreE = teclado.nextLine();
-                    ConexionBases.borrarBaseDatos(nombreE);
+                    System.out.println("++++++++++++++++++++++++++++++++++");
+                    ConexionBases.borrarBaseDatos();
                     break;
                 case 3:
+                    System.out.println("++++++++++++++++++++++++++++++++++");
                     MenuSeleccionBases.correrMenu();
                     break;
+                default:
+                    if (opcion != 4) {
+                        System.out.println("Ese numero no existe");
+                    }
             }
         } while(opcion != 4);
         Utilidades.salir();

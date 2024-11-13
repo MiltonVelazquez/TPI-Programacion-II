@@ -19,22 +19,28 @@ public class MenuTrabajarConDato {
         Scanner teclado = new Scanner(System.in);
         int opcion = 0;
         do {
+            System.out.println("++++++++++++++++++++++++++++++++++");
             menuPrincipal();
             opcion = Utilidades.tomarOpcion();
             switch(opcion){
                 case 1:
+                    System.out.println("++++++++++++++++++++++++++++++++++");
                     ConexionDato.crearDato(baseSeleccionada);
                     break;
                 case 2:
+                    System.out.println("++++++++++++++++++++++++++++++++++");
                     ConexionDato.listarDatos(baseSeleccionada);
                     break;
                 case 3:
+                    System.out.println("++++++++++++++++++++++++++++++++++");
                     ConexionDato.actualizarDato(baseSeleccionada);
                     break;
                 case 4:
+                    System.out.println("++++++++++++++++++++++++++++++++++");
                     ConexionDato.eliminarDato(baseSeleccionada);
                     break;
                 case 5:
+                    System.out.println("++++++++++++++++++++++++++++++++++");
                     MenuTrabajarConBase.correrMenu(baseSeleccionada);
                     break;
             }

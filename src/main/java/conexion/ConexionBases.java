@@ -1,13 +1,16 @@
 package conexion;
 
 import menus.Main;
+import menus.MenuSeleccionBases;
 import menus.MenuTrabajarConCampo;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class ConexionBases {
+    static Scanner teclado = new Scanner(System.in);
     public static void crearBaseDatos(String baseDatos){
 
         try (Connection conn = DriverManager.getConnection(Conexion.url, Conexion.usuario, Conexion.contra); Statement stmt = conn.createStatement()){
@@ -48,14 +51,31 @@ public class ConexionBases {
         }
         return basesDatos;
     }
-    public static void borrarBaseDatos(String nombre){
+    public static void borrarBaseDatos(){
+        List<String> basesDatos = listarBases();
         try (Connection conn = DriverManager.getConnection(Conexion.url, Conexion.usuario, Conexion.contra); Statement stmt = conn.createStatement()){
-            System.out.println("DROP DATABASE " + nombre);
-            String sql = "DROP DATABASE " + nombre;
+            basesEliminar(basesDatos);
+            String nombreE = "";
+            boolean baseValida = false;
+            while (!baseValida) {
+                System.out.print("Ingrese el nombre de la base de datos a eliminar: ");
+                nombreE = teclado.nextLine();
+                if (basesDatos.contains(nombreE)) {
+                    baseValida = true;
+            } else {
+                System.out.println("La base de datos ingresada no existe. Por favor, intente nuevamente.");
+            }
+            }
+            String sql = "DROP DATABASE " + nombreE;
             stmt.executeUpdate(sql);
         }catch(SQLException e){
             System.out.println("Error: " + e.getMessage());
             Main.correrMenu();
+        }
+    }
+    public static void basesEliminar(List<String> basesDatos) {
+        for (int i = 0; i < basesDatos.size(); i++) {
+            System.out.println((i + 1) + " - " + basesDatos.get(i));
         }
     }
 }

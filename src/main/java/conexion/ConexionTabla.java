@@ -30,18 +30,21 @@ public class ConexionTabla {
         }
     }
 
-    public static void listarTabla(String baseSeleccionada){
+    public static List<String> listarTabla(String baseSeleccionada){
+        List<String> tablas = new ArrayList <>();
         try (Connection conn = DriverManager.getConnection(Conexion.url + baseSeleccionada, Conexion.usuario, Conexion.contra); Statement stmt = conn.createStatement()) {
             String sql = "SHOW TABLES";
             ResultSet resultado = stmt.executeQuery(sql);
             System.out.println("Tablas en la base de datos: ");
             while (resultado.next()) {
                 System.out.println(resultado.getString(1));
+                tablas.add(resultado.getString(1));
             }
         } catch (SQLException e){
             System.out.println("Error: " + e.getMessage());
             MenuTrabajarConTabla.correrMenu(baseSeleccionada);
         }
+        return tablas;
     }
 
     public static void eliminarTabla(String baseSeleccionada) {

@@ -7,22 +7,28 @@ public class MenuTrabajarConCampo {
     static int opcion = 0;
     public static void correrMenu(String baseSeleccionada){
         do {
+            System.out.println("++++++++++++++++++++++++++++++++++");
             menu();
             opcion = Utilidades.tomarOpcion();
             switch (opcion) {
                 case 1:
+                    System.out.println("++++++++++++++++++++++++++++++++++");
                     ConexionColumna.crearColumna(baseSeleccionada);
                     break;
                 case 2:
+                    System.out.println("++++++++++++++++++++++++++++++++++");
                     ConexionColumna.listarColumna(baseSeleccionada);
                     break;
                 case 3:
+                    System.out.println("++++++++++++++++++++++++++++++++++");
                     ConexionColumna.modificarColumna(baseSeleccionada);
                     break;
                 case 4:
+                    System.out.println("++++++++++++++++++++++++++++++++++");
                     ConexionColumna.eliminarColumna(baseSeleccionada);
                     break;
                 case 5:
+                    System.out.println("++++++++++++++++++++++++++++++++++");
                     MenuTrabajarConBase.correrMenu(baseSeleccionada);
                     break;
             }
